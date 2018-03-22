@@ -41,7 +41,7 @@ def post_interval_average():
         email_v, since_v = validate_interval(input)
         user = models.User.objects.raw({"_id": email_v}).first()
         interval_average = calculate_interval_avg(user.heart_rate,
-                            user.heart_rate_times, since_v)
+                                                  user.heart_rate_times, since_v)
         tachy_flag = check_tachycardia(interval_average, user.age)
         done = {"user": email_v,
                 "status": "verified and average calculated",
