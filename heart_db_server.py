@@ -65,6 +65,7 @@ def post_interval_average():
         data = {"message": 'User does not exist.'}
         return jsonify(data), 400
     except ValueError:
+        print('No heart rates recorded since input time.')
         data = {"message": 'No heart rates recorded since input time.'}
         return jsonify(data), 400
     except UnknownError:
