@@ -59,19 +59,18 @@ def test_validate_interval():
 
 
 def test_calculate_interval_avg():
-    hrs = [80, 60, 100]
+    hrs = [80, 60, 40]
     t1 = "2018-03-09 10:00:36.372339"
     t2 = "2018-03-09 11:00:36.372339"
     t3 = "2018-03-09 12:00:36.372339"
     s1 = "2018-03-09 10:10:36.372339"
     s2 = "2018-03-10 10:10:36.372339"
     times = [datetime.datetime.strptime(t1, "%Y-%m-%d %H:%M:%S.%f"),
-            datetime.datetime.strptime(t2, "%Y-%m-%d %H:%M:%S.%f"),
-            datetime.datetime.strptime(t3, "%Y-%m-%d %H:%M:%S.%f")]
+             datetime.datetime.strptime(t2, "%Y-%m-%d %H:%M:%S.%f"),
+             datetime.datetime.strptime(t3, "%Y-%m-%d %H:%M:%S.%f")]
     since1 = datetime.datetime.strptime(s1, "%Y-%m-%d %H:%M:%S.%f")
     since2 = datetime.datetime.strptime(s2, "%Y-%m-%d %H:%M:%S.%f")
     interval_average1 = calculate_interval_avg(hrs, times, since1)
-    assert(interval_average1 == 80)
+    assert(interval_average1 == 50)
     with pytest.raises(ValueError):
         interval_average2 = calculate_interval_avg(hrs, times, since2)
-    
