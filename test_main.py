@@ -74,3 +74,20 @@ def test_calculate_interval_avg():
     assert(interval_average1 == 50)
     with pytest.raises(ValueError):
         interval_average2 = calculate_interval_avg(hrs, times, since2)
+
+
+def test_check_tachycardia():
+    hr1 = 150
+    hr2 = 130
+    hr3 = 90
+    age1 = 1
+    age2 = 3
+    age3 = 10
+    age4 = 20
+    assert(check_tachycardia(hr1, age1) is False)
+    assert(check_tachycardia(hr1, age2) is True)
+    assert(check_tachycardia(hr2, age1) is False)
+    assert(check_tachycardia(hr2, age3) is False)
+    assert(check_tachycardia(hr2, age4) is True)
+    assert(check_tachycardia(hr3, age1) is False)
+    assert(check_tachycardia(hr3, age4) is False)
