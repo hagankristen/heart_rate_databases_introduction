@@ -1,2 +1,5 @@
 pymodm
 flask
+numpy
+requests
+pytest
