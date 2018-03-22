@@ -84,6 +84,7 @@ def get_heart_rates(user_email):
         data = {"message": 'User does not exist.'}
         return jsonify(data), 400
 
+
 @app.route("/api/heart_rate/average/<user_email>", methods=["GET"])
 def get_heart_rate_average(user_email):
     try:
