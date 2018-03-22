@@ -5,6 +5,12 @@ import numpy as np
 
 
 def add_heart_rate(email, heart_rate, time):
+    """Appends new heart rate to User and save to db
+
+    :param email: email of user
+    :param heart_rate: heart rate to append to user
+    :param time: time heart rate was taken (datetime)
+    """
     # Get the first user where _id=email
     user = models.User.objects.raw({"_id": email}).first()
     # Append the heart_rate to the user's list of heart rates
@@ -15,6 +21,12 @@ def add_heart_rate(email, heart_rate, time):
 
 
 def create_user(email, age, heart_rate):
+    """Create new user and save to db
+
+    :param email: email of user
+    :param heart_rate: heart rate to add to user
+    :param age: age of user in years
+    """
     u = models.User(email, age, [], [])  # create a new User instance
     u.heart_rate.append(heart_rate)  # add initial heart rate
     # add initial heart rate time
@@ -23,7 +35,10 @@ def create_user(email, age, heart_rate):
 
 
 def print_user(email):
-    # Get the first user where _id=email
+    """prints User info stored in db
+
+    :param email: email of user
+    """
     user = models.User.objects.raw({"_id": email}).first()
     print(user.email)
     print(user.heart_rate)
@@ -31,6 +46,13 @@ def print_user(email):
 
 
 def validate_user(input_json):
+    """Validates input entry (check type and keys)
+
+    :param input_json: dict of email, age and heart_rate
+    :returns email_key, age_key, heart_rate_key: values in input
+    :raises KeyError: wrong key used in input
+    :raises TypeError: wrong data types in input
+    """
     try:
         email_key = input_json["user_email"]
         age_key = input_json["user_age"]
@@ -51,6 +73,16 @@ def validate_user(input_json):
 
 
 def validate_interval(input_json):
+    """Validates input entry for interval calc
+
+    :param input_json: dict of email and time since
+    :returns email_key, since_key: values in input
+                                    with time in
+                                    datetime format
+    :raises KeyError: wrong key used in input
+    :raises TypeError: wrong data types in input
+    :raises UnknownError: UnknownError occurs
+    """
     try:
         email_key = input_json["user_email"]
         since_key = input_json["heart_rate_average_since"]
@@ -74,6 +106,16 @@ def validate_interval(input_json):
 
 
 def calculate_interval_avg(hrs, times, t):
+    """Calculates interval average since time 't'
+
+    :param hrs, times, t: heart rates, time of heart
+                            rate recording, and time
+                            from which to find avg
+    :returns interval_average: average hr in specified
+                                time frame
+    :raises ValueError: no heart rates taken
+                        in specified time frame
+    """
     hrs_np = np.array(hrs)
     times_np = np.array(times)
     mask = (times_np >= t)
@@ -84,6 +126,13 @@ def calculate_interval_avg(hrs, times, t):
 
 
 def check_tachycardia(hr, age):
+    """Checks for tachycardia using user age
+
+    :param hr, age: user heart rate and age
+    :returns tachy_flag: boolean flag, T for
+                            tachy and F for
+                            normal hr
+    """
     tachy_flag = False
     if ((age <= 2) & (hr > 151)):
         tachy_flag = True
