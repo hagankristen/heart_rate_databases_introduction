@@ -71,6 +71,7 @@ def get_heart_rates(user_email):
 def get_heart_rate_average(user_email):
     user = models.User.objects.raw({"_id": user_email}).first()
     hi = {"user_email": user_email,
-          "average of recorded heart rates": sum(user.heart_rate)/len(user.heart_rate)
+          "average of recorded heart rates":
+          sum(user.heart_rate)/len(user.heart_rate)
           }
     return jsonify(hi), 200

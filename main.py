@@ -99,7 +99,7 @@ def check_tachycardia(hr, age):
     return tachy_flag
 
 # if __name__ == "__main__":
-#    connect("mongodb://vcm-3580.vm.duke.edu:27017/heart_rate_app") # open up connection to db
-#    create_user(email="kristen.hagan@duke.edu", age=23, heart_rate=60) # we should only do this once, otherwise will overwrite existing user
+#    connect("mongodb://vcm-3580.vm.duke.edu:27017/heart_rate_app")
+#    create_user(email="kristen.hagan@duke.edu", age=23, heart_rate=60)
 #    add_heart_rate("kristen.hagan@duke.edu", 100, datetime.datetime.now())
 #    print_user("kristen.hagan@duke.edu")

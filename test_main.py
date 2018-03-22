@@ -2,8 +2,11 @@ from pymodm import connect, errors
 import models
 import datetime
 import numpy as np
-import pytest 
-
+import pytest
+import datetime
+from main import add_heart_rate, create_user, print_user
+from main import validate_user, validate_interval
+from main import check_tachycardia, calculate_interval_avg
 
 def test_validate_user():
     input1 = {
