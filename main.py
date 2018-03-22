@@ -73,12 +73,10 @@ def validate_interval(input_json):
         raise UnknownError
 
 
-def calculate_interval_avg(user, t):
-    hrs = user.heart_rate
-    times = user.heart_rate_times
+def calculate_interval_avg(hrs, times, t):
     hrs_np = np.array(hrs)
     times_np = np.array(times)
-    mask = (times_np >= datetime.datetime(t))
+    mask = (times_np >= t)
     hrs_count = hrs_np[mask]
     if hrs_count.size is 0:
         raise ValueError
