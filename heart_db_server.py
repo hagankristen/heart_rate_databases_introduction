@@ -56,8 +56,9 @@ def post_interval_average():
         print('User does not exist.')
     except ValueError:
         print('No heart rates recorded since input time.')
-    except UnknownError: 
+    except UnknownError:
         print('UnknownError occured.')
+
 
 @app.route("/api/heart_rate/<user_email>", methods=["GET"])
 def get_heart_rates(user_email):

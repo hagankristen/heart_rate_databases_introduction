@@ -34,11 +34,12 @@ def test_validate_user():
     assert(c2 == input3["user_age"])
     assert(c3 == input3["heart_rate"])
 
+
 def test_validate_interval():
     input1 = {
-    "user_email": "suyash@suyashkumar.com",
-    "heart_rate_average_since": 2016
-    }
+        "user_email": "suyash@suyashkumar.com",
+        "heart_rate_average_since": 2016
+        }
     with pytest.raises(TypeError):
         a1, a2 = validate_interval(input1)
     input2 = {
@@ -53,4 +54,5 @@ def test_validate_interval():
         }
     c1, c2 = validate_interval(input3)
     assert(c1 == input3["user_email"])
-    assert(c2 == input3["heart_rate_average_since"])
+    assert(c2 == datetime.datetime.strptime(
+        input3["heart_rate_average_since"], "%Y-%m-%d %H:%M:%S.%f"))

@@ -72,6 +72,7 @@ def validate_interval(input_json):
         print('Check format of inputs.')
         raise UnknownError
 
+
 def calculate_interval_avg(user, t):
     hrs = user.heart_rate
     times = user.heart_rate_times
