@@ -39,15 +39,15 @@ def validate_user(input_json):
         age_flag = isinstance(age_key, int)
         heart_rate_flag = isinstance(heart_rate_key, int)
         if not email_flag or not age_flag or not heart_rate_flag:
-            raise ValueError
+            raise TypeError
         print('Input data verified.')
         return email_key, age_key, heart_rate_key
     except KeyError:
         print('Input fails validation. Include email, age, and HR.')
         raise KeyError
-    except ValueError:
+    except TypeError:
         print('Input fails validation. Check data types.')
-        raise ValueError
+        raise TypeError
 
 
 def validate_interval(input_json):
@@ -59,16 +59,18 @@ def validate_interval(input_json):
         since_key = datetime.datetime.strptime(
             since_key, "%Y-%m-%d %H:%M:%S.%f")
         if not email_flag or not since_flag:
-            raise ValidationError
+            raise TypeError
         print('Input data verified.')
         return email_key, since_key
     except KeyError:
         print('Input fails validation. Include email and interval.')
         raise KeyError
-    except ValidationError:
+    except TypeError:
         print('Input fails validation. Check data types.')
-        raise ValidationError
-
+        raise TypeError
+    except:
+        print('Check format of inputs.')
+        raise UnknownError
 
 def calculate_interval_avg(user, t):
     hrs = user.heart_rate

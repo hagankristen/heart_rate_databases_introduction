@@ -15,7 +15,7 @@ def test_validate_user():
         "user_age": "adult",
         "heart_rate": 100
     }
-    with pytest.raises(ValueError):
+    with pytest.raises(TypeError):
         a1, a2, a3 = validate_user(input1)
     input2 = {
         "user": "suyash@suyashkumar.com",
@@ -33,3 +33,24 @@ def test_validate_user():
     assert(c1 == input3["user_email"])
     assert(c2 == input3["user_age"])
     assert(c3 == input3["heart_rate"])
+
+def test_validate_interval():
+    input1 = {
+    "user_email": "suyash@suyashkumar.com",
+    "heart_rate_average_since": 2016
+    }
+    with pytest.raises(TypeError):
+        a1, a2 = validate_interval(input1)
+    input2 = {
+        "user": "suyash@suyashkumar.com",
+        "heart_rate_average_since": "2018-03-09 11:00:36.372339"
+        }
+    with pytest.raises(KeyError):
+        b1, b2 = validate_interval(input2)
+    input3 = {
+        "user_email": "suyash@suyashkumar.com",
+        "heart_rate_average_since": "2018-03-09 11:00:36.372339"
+        }
+    c1, c2 = validate_interval(input3)
+    assert(c1 == input3["user_email"])
+    assert(c2 == input3["heart_rate_average_since"])

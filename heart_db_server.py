@@ -50,13 +50,14 @@ def post_interval_average():
         return jsonify(done), 200
     except KeyError:
         print('POST to /api/heart_rate/interval_average failed.')
-    except ValidationError:
+    except TypeError:
         print('POST to /api/heart_rate/interval_average failed.')
     except errors.DoesNotExist:
         print('User does not exist.')
     except ValueError:
         print('No heart rates recorded since input time.')
-
+    except UnknownError: 
+        print('UnknownError occured.')
 
 @app.route("/api/heart_rate/<user_email>", methods=["GET"])
 def get_heart_rates(user_email):
