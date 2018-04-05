@@ -107,10 +107,12 @@ def get_heart_rate_average(user_email):
 @app.route("/api/heart_rate/userlist", methods=["GET"])
 def get_userlist():
     try:
-        db.getUsers()
-        hi = {"user_emails": 1,
+        result = []
+        for user in models.User.objects.all():
+            result.append(user.email)
+        hi = {"user_emails": result,
         }
         return jsonify(hi), 200
-    except UnknownError:
+    except:
         data = {"message": 'Problem getting list.'}
         return jsonify(data), 400
