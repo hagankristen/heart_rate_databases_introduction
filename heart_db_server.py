@@ -83,7 +83,8 @@ def get_heart_rates(user_email):
         user = models.User.objects.raw({"_id": user_email}).first()
         hi = {"user_email": user_email,
               "recorded_heart_rates": user.heart_rate,
-              "hr_times": user.heart_rate_times
+              "hr_times": user.heart_rate_times,
+              "age": user.age
               }
         return jsonify(hi), 200
     except errors.DoesNotExist:
